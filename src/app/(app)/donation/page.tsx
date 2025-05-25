@@ -4,7 +4,7 @@
 
 import React, { useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Coffee, DollarSign, Heart } from 'lucide-react';
+import { Coffee, DollarSign, Heart, Smartphone } from 'lucide-react';
 import Image from 'next/image';
 // Removed unused Button component as BMC provides its own
 
@@ -91,6 +91,21 @@ export default function DonationPage() {
                 </p>
                 {/* The Buy Me A Coffee button is usually injected by their script, often as a fixed/floating element.
                     So, we don't need a specific button here unless their integration guide says otherwise for this setup. */}
+              </div>
+              <hr />
+              <div>
+                <h3 className="font-semibold mb-2 text-foreground flex items-center gap-2">
+                  <Smartphone size={20} className="text-green-500" /> Google Pay
+                </h3>
+                <p className="text-sm text-muted-foreground mb-2">
+                  You can send a donation via Google Pay to the following identifier (e.g., email or phone number):
+                </p>
+                <div className="p-3 border rounded-md bg-muted/50">
+                  <p className="text-sm font-medium text-foreground break-all">
+                    {/* Replace with your actual Google Pay email/phone */}
+                    your.email@example.com OR +1234567890 
+                  </p>
+                </div>
               </div>
               <hr />
               <div>
