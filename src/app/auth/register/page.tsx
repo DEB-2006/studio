@@ -52,9 +52,25 @@ export default function RegisterPage() {
       router.push('/auth/login'); // Redirect to login page after successful registration
     } catch (error: any) {
       console.error("Registration error:", error);
+      let errorMessage = "An unexpected error occurred. Please try again.";
+      if (error.code) {
+        switch (error.code) {
+          case 'auth/email-already-in-use':
+            errorMessage = 'This email address is already in use.';
+            break;
+          case 'auth/invalid-email':
+            errorMessage = 'Invalid email format.';
+            break;
+          case 'auth/weak-password':
+            errorMessage = 'Password is too weak. Please choose a stronger password.';
+            break;
+          default:
+            errorMessage = error.message;
+        }
+      }
       toast({
         title: "Registration Failed",
-        description: error.message || "An unexpected error occurred. Please try again.",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
