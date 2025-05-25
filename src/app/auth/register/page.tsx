@@ -3,12 +3,15 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Eye, EyeOff, UserPlus } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { auth } from '@/lib/firebase-config'; // Import Firebase auth instance
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 export default function RegisterPage() {
   const [email, setEmail] = useState('');
@@ -18,6 +21,7 @@ export default function RegisterPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -29,24 +33,33 @@ export default function RegisterPage() {
       });
       return;
     }
+    if (password.length < 6) {
+      toast({
+        title: "Error",
+        description: "Password should be at least 6 characters long.",
+        variant: "destructive",
+      });
+      return;
+    }
     setIsLoading(true);
-    // TODO: Implement Firebase Authentication registration
-    console.log('Registration attempt with:', { email, password });
-
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
     
-    // This is a placeholder. Replace with actual Firebase Auth logic.
-    // If successful, you might sign the user in and redirect, or prompt them to verify email.
-    // If error, display error message.
-    // To "store the number of users", Firebase Auth provides ways to get user counts.
-    // Alternatively, a Cloud Function triggered on user creation could update a count in Firestore.
-    toast({
-      title: "Registration Submitted (Placeholder)",
-      description: "Actual registration logic with Firebase Auth needs to be implemented.",
-    });
-    setIsLoading(false);
-    // Example: router.push('/auth/login');
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      toast({
+        title: "Registration Successful",
+        description: "Your account has been created. Please login.",
+      });
+      router.push('/auth/login'); // Redirect to login page after successful registration
+    } catch (error: any) {
+      console.error("Registration error:", error);
+      toast({
+        title: "Registration Failed",
+        description: error.message || "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -71,7 +84,7 @@ export default function RegisterPage() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">Password (min. 6 characters)</Label>
               <div className="relative">
                 <Input
                   id="password"
