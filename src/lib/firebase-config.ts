@@ -1,16 +1,14 @@
 // src/lib/firebase-config.ts
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-
-// IMPORTANT: Replace these with your actual Firebase project configuration if you haven't already
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID",
-  measurementId: "YOUR_MEASUREMENT_ID" // Optional, for Google Analytics
+  apiKey: "AIzaSyCxMIGHGsku_AMp0LsXZlsgFA1lMBy6Ef4",
+  authDomain: "snaprecipe-4woms.firebaseapp.com",
+  projectId: "snaprecipe-4woms",
+  storageBucket: "gs://snaprecipe-4woms.firebasestorage.app",
+  messagingSenderId: "1067227776613",
+  appId: "1:1067227776613:web:1919ab78477b268be2688c",
+  measurementId: "G-GB999R5R4K" // Optional, for Google Analytics
 };
 
 // Initialize Firebase
