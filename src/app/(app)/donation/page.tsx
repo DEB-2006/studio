@@ -4,9 +4,9 @@
 
 import React, { useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Coffee, DollarSign, Heart, Smartphone } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Coffee, DollarSign, Heart, Smartphone, CreditCard } from 'lucide-react';
 import Image from 'next/image';
-// Removed unused Button component as BMC provides its own
 
 export default function DonationPage() {
   useEffect(() => {
@@ -89,8 +89,23 @@ export default function DonationPage() {
                 <p className="text-sm text-muted-foreground mb-2">
                   Click the "Buy me a coffee" button (usually appears in a corner of the screen) to make a one-time donation.
                 </p>
-                {/* The Buy Me A Coffee button is usually injected by their script, often as a fixed/floating element.
-                    So, we don't need a specific button here unless their integration guide says otherwise for this setup. */}
+                {/* The Buy Me A Coffee button is injected by their script. */}
+              </div>
+              <hr />
+               <div>
+                <h3 className="font-semibold mb-2 text-foreground flex items-center gap-2">
+                  <CreditCard size={20} className="text-blue-500" /> Pay with Card (via Payment Processor)
+                </h3>
+                <p className="text-sm text-muted-foreground mb-2">
+                  Use a secure payment processor like Stripe or PayPal.
+                  You would replace the button below with the integration code from your chosen provider.
+                </p>
+                <Button className="w-full" size="lg" disabled>
+                  Donate with Card (Setup Required)
+                </Button>
+                 <p className="text-xs text-muted-foreground mt-1">
+                  This is a placeholder. You'll need to integrate a service like Stripe or PayPal here.
+                </p>
               </div>
               <hr />
               <div>
@@ -98,7 +113,7 @@ export default function DonationPage() {
                   <Smartphone size={20} className="text-green-500" /> Google Pay
                 </h3>
                 <p className="text-sm text-muted-foreground mb-2">
-                  You can send a donation via Google Pay to the following identifier (e.g., email or phone number):
+                  You can send a donation via Google Pay to the following identifier:
                 </p>
                 <div className="p-3 border rounded-md bg-muted/50">
                   <p className="text-sm font-medium text-foreground break-all">
@@ -111,12 +126,11 @@ export default function DonationPage() {
               <div>
                 <h3 className="font-semibold mb-2 text-foreground">Donate with Crypto</h3>
                 <p className="text-sm text-muted-foreground mb-2">
-                  You can display a QR code for your crypto wallet address.
-                  Replace the placeholder image and address below.
+                  Scan the QR code or copy an address below.
                 </p>
                 <div className="flex flex-col items-center p-4 border rounded-md bg-muted/50">
                    <Image
-                    src="https://placehold.co/150x150.png" // Replace with your actual QR code image file (e.g., /my-crypto-qr.png)
+                    src="https://placehold.co/150x150.png" // Replace with your actual QR code image file for your primary crypto (e.g., /btc-qr.png)
                     alt="Crypto QR Code Placeholder"
                     width={150}
                     height={150}
@@ -124,11 +138,14 @@ export default function DonationPage() {
                     className="rounded-md"
                   />
                   <p className="text-xs mt-2 text-muted-foreground break-all">
+                    {/* Replace with your actual Bitcoin address */}
                     BTC: 1YourBitcoinAddressHere...
                   </p>
                    <p className="text-xs mt-1 text-muted-foreground break-all">
+                    {/* Replace with your actual Ethereum address */}
                     ETH: 0xYourEthereumAddressHere...
                   </p>
+                  {/* Add more crypto addresses if needed */}
                 </div>
               </div>
             </CardContent>
