@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useRef, useCallback } from 'react';
@@ -33,8 +34,8 @@ export function ImageUploader({ onImageDataUriReady, isLoading }: ImageUploaderP
     setError(null);
     const file = event.target.files?.[0];
     if (file) {
-      if (file.size > 5 * 1024 * 1024) { // 5MB limit
-        setError("File is too large. Maximum size is 5MB.");
+      if (file.size > 40 * 1024 * 1024) { // 40MB limit
+        setError("File is too large. Maximum size is 40MB.");
         return;
       }
       if (!file.type.startsWith('image/')) {
