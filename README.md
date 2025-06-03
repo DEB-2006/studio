@@ -1,4 +1,4 @@
-# Firebase Studio
+# SnapRecipe
 
 This is a NextJS starter in Firebase Studio.
 
